@@ -6,6 +6,7 @@
         private readonly string _filename;
         private List<string> _lines;
 
+        /// This Class Writes a List to a File
         public ListFileWriter(string path, string filename, List<string> lines)
         {
             _path = path;
