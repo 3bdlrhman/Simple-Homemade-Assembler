@@ -113,7 +113,7 @@
             #endregion
         }
 
-
+        /// Go through all instructions locate labels then add them with their value to the labels dictionary
         public void ScanLabels()
         {
             var fileRead = File.OpenRead(_path);
@@ -140,7 +140,7 @@
             fileRead.Close();
         }
 
-
+        /// Go through the instructions test whether its A-instruction or C-instruction then handle it
         public void ScanInstructions()
         {
             var fileRead = File.OpenRead(_path);
@@ -173,19 +173,19 @@
             fileRead.Close();
         }
 
-
+        /// Test if the instruction is an A-instruction
         public bool IsA_Instruction(string instruction) 
         {
             return instruction.Trim().StartsWith('@');
         }
         
-        
+        /// Test if the instruction is a C-instruction
         public bool IsC_Instruction(string instruction) 
         {
             return !IsA_Instruction(instruction);
         }
 
-        
+        /// Handles A-instruction by getting the binary value of the integer
         public string HandleA_Instruction(string AInstruction)
         {
             var inst_string = AInstruction.Split('@')[1].Trim();
@@ -216,7 +216,7 @@
             }
         }
 
-
+        /// takes an integer and returns its binary value
         private string GetBinaryFromInt(int integer)
         {
             string binaryString = Convert.ToString(integer, 2).PadLeft(16, '0');
@@ -224,7 +224,7 @@
             return binaryString;
         }
 
-
+        // gets the parts of a C-instruction then the value of each part
         public string HandleC_Instruction(string CInstruction)
         {
             //  1-bit [c-inst] 2-bits [no-use] 7-bits [control] 3-bits [dest] 3-bits [jump]
@@ -239,7 +239,7 @@
             return code;
         }
 
-
+        /// c-instruction has three parts [controls-jumps-destination]
         private string[] GetParts(string command)
         {
             string[] result = new string[3];
